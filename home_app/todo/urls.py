@@ -17,6 +17,11 @@ from django.urls import path, include
 from todo import views
 
 urlpatterns = [
-    path('todo_list/', views.TodoList.as_view(), name='todo_list'),
-    path('todo_details/<int:pk>', views.TodoDetail.as_view(), name='todo_detail')
+    path('todos/', views.TodoList.as_view(), name='todo_list'),
+    path('todos/<int:pk>', views.TodoDetail.as_view(), name='todo_detail'),
+    #path('todos/<int:pk>/highlight/', views.TodoHighlights.as_view(), name='todo_highlight'),
+    path('categories/', views.CategoryList.as_view(), name='category_list'),
+    path('categories/<int:pk>',
+         views.CategoryDetail.as_view(), name='category_details'),
+    path('', views.api_root),
 ]
