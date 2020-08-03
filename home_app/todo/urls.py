@@ -14,14 +14,49 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from todo import views
+from todo.views import api_root, TodoViewSet, CategoryViewSet
+
+
+todo_list = TodoViewSet.as_view(
+    {
+        'get': 'list',
+        'post': 'create'
+    }
+)
+
+todo_detail = TodoViewSet.as_view(
+    {
+        'get': 'retrieve',
+        'put': 'update',
+        'patch': 'partial_update',
+        'delete': 'destroy',
+    }
+)
+
+category_list = CategoryViewSet.as_view(
+    {
+        'get': 'list',
+        'post': 'create'
+    }
+)
+
+category_detail = CategoryViewSet.as_view(
+    {
+        'get': 'retrieve',
+        'put': 'update',
+        'patch': 'partial_update',
+        'delete': 'destroy',
+    }
+)
+
 
 urlpatterns = [
-    path('todos/', views.TodoList.as_view(), name='todo_list'),
-    path('todos/<int:pk>', views.TodoDetail.as_view(), name='todo_detail'),
+    path('', api_root),
+    path('todos/', todo_list, name='todo_list'),
+    path('todos/<int:pk>', todo_detail, name='todo_detail'),
     #path('todos/<int:pk>/highlight/', views.TodoHighlights.as_view(), name='todo_highlight'),
-    path('categories/', views.CategoryList.as_view(), name='category_list'),
+    path('categories/', category_list, name='category_list'),
     path('categories/<int:pk>',
-         views.CategoryDetail.as_view(), name='category_details'),
-    path('', views.api_root),
+         category_detail, name='category_details'),
+
 ]
