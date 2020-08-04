@@ -18,49 +18,6 @@ def api_root(request, format=None):
     })
 
 
-class TodoList(generics.ListCreateAPIView):
-    """
-    List of all todo entries, or creating a new todo
-    """
-    queryset = TodoEntry.objects.all()
-    serializer_class = TodoSerializer
-
-
-class TodoDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a todo entry
-    """
-    queryset = TodoEntry.objects.all()
-    serializer_class = TodoSerializer
-
-
-'''
-class TodoHighlights(generics.GenericAPIView):
-    queryset = TodoEntry.objects.all()
-    renderer_classes = [renderers.StaticHTMLRenderer]
-
-    def get(self, request, *args, **kwargs):
-        todo = self.get_object()
-        return Response(todo.highlighted)
-        '''
-
-
-class CategoryList(generics.ListCreateAPIView):
-    """
-    List of all Categories, or creating a new Categories
-    """
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-
-class CategoryDetail(generics.RetrieveDestroyAPIView):
-    """
-    Show or delete a specific Category
-    """
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-
 class TodoViewSet(viewsets.ModelViewSet):
     '''
     This viewset automatically provides `list`, `create`, `retrieve`,

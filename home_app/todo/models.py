@@ -15,7 +15,7 @@ class Category(models.Model):
 
 class TodoEntry(models.Model):
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.SET_NULL, null=True, related_name='todos')
     text = models.CharField(max_length=150)
     created_date = models.DateTimeField(default=timezone.now())
     due_date = models.DateTimeField(null=True, blank=True)
